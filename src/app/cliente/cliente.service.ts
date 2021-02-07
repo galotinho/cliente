@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,37 +8,33 @@ import { HttpClient } from '@angular/common/http';
 export class ClienteService {
   
 
-  url = 'http://localhost:3000/cliente';
-  url_estado = 'http://localhost:3000/estado';
-  url_cidade = 'http://localhost:3000/cidade';
-  
   constructor(private http: HttpClient){}
 
   listar(){
-    return this.http.get(this.url);
+    return this.http.get(`${environment.url}`+'/cliente');
   }
 
   buscarById(id: number) {
-    return this.http.get(this.url+'/'+id);
+    return this.http.get(`${environment.url}`+'/cliente/'+id);
   }
 
   salvar(cliente: any){
-    return this.http.post(this.url, cliente);
+    return this.http.post(`${environment.url}`+'/cliente', cliente);
   }
 
   atualizar(cliente: any) {
-    return this.http.put(this.url+'/'+cliente.id, cliente);
+    return this.http.put(`${environment.url}`+'/cliente/'+cliente.id, cliente);
   }
 
   excluir(id: number) {
-    return this.http.delete(this.url+'/'+id);
+    return this.http.delete(`${environment.url}`+'/cliente/'+id);
   }
 
   listarEstados(){
-    return this.http.get(this.url_estado);
+    return this.http.get(`${environment.url}`+'/estado');
   }
 
   listarCidades(id: number) {
-    return this.http.get(this.url_cidade+'?estado='+id);
+    return this.http.get(`${environment.url}`+'/cidade'+'?estado='+id);
   }
 }
