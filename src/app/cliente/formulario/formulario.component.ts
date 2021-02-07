@@ -1,5 +1,5 @@
 import { ClienteService } from './../cliente.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
@@ -42,14 +42,15 @@ export class FormularioComponent implements OnInit {
   cidades: any[] = [];
   cidade: any; 
   codigoCliente: any;
- 
+  
   operacao: boolean = true;
 
   constructor(
     private service: ClienteService,
     private messageService: MessageService,  
     private route: ActivatedRoute,
-    private title: Title) { }
+    private title: Title,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.listarEstados(); 
@@ -71,10 +72,13 @@ export class FormularioComponent implements OnInit {
   listarCidades(){
     this.cidades = [];
     let id: number = this.estado.id;
+   
     this.service.listarCidades(id).subscribe(resposta => {
       this.cidades = <any>resposta;  
-      if(this.codigoCliente){
+      if(this.codigoCliente && this.cliente.endereco.estado.id == this.estado.id){
         this.cidade = {id: this.cliente.endereco.estado.cidade.id, nome: this.cliente.endereco.estado.cidade.nome};        
+      }else{
+        this.cidade = {id: this.cidades[0].id, nome: this.cidades[0].nome};
       }          
     });
   }
@@ -143,6 +147,7 @@ export class FormularioComponent implements OnInit {
       });
       this.limparFormulario(); //limpar os campos     
       this.operacao = true; 
+      this.router.navigate(['/listar/cliente']);
     },    
     () => {
       this.messageService.add(

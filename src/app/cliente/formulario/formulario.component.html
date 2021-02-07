@@ -155,7 +155,12 @@
                     name="cidade"
                     optionLabel="nome"                     
                     [filter]="true" 
-                    [style]="{'width':'100%'}">                                                                             
+                    [style]="{'width':'100%'}">
+                    <ng-template pTemplate="selectedItem">
+                        <div *ngIf="cidade">
+                            <div>{{cidade.nome}}</div>
+                        </div>
+                    </ng-template>                                      
                 </p-dropdown>
             </div>
         </div>       
