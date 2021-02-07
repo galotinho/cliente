@@ -8,7 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { ClienteRoutingModule } from './cliente-routing.module';
 import { FormularioComponent } from './formulario/formulario.component';
@@ -24,7 +24,6 @@ import { TabelaComponent } from './tabela/tabela.component';
     BrowserAnimationsModule,
     ClienteRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     DropdownModule,    
     InputMaskModule,
     FileUploadModule,
