@@ -1,51 +1,6 @@
 {
   "cliente": [
     {
-      "id": 2,
-      "nome": "Rafael",
-      "email": "rafael@dh.com.br",
-      "endereco": {
-        "cep": "45623-856"
-      },
-      "dataNasc": "23/11/2020"
-    },
-    {
-      "id": 3,
-      "nome": "Rafael",
-      "email": "rafael@dh.com.br",
-      "endereco": {
-        "cep": "45623-856"
-      },
-      "dataNasc": "23/11/2020"
-    },
-    {
-      "id": 4,
-      "nome": "Rafael",
-      "email": "rafael@dh.com.br",
-      "endereco": {
-        "cep": "45623-856"
-      },
-      "dataNasc": "23/11/2020"
-    },
-    {
-      "id": 5,
-      "nome": "Ian",
-      "email": "ian@dh.com.br",
-      "endereco": {
-        "cep": "45623-856"
-      },
-      "dataNasc": "23/11/2020"
-    },
-    {
-      "id": 8,
-      "nome": "Rafael",
-      "email": "rafael@dh.com.br",
-      "endereco": {
-        "cep": "45623-856"
-      },
-      "dataNasc": "23/11/2020"
-    },
-    {
       "id": 9,
       "nome": "Rafael",
       "sobrenome": "Lopes",
