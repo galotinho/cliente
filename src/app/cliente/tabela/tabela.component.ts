@@ -1,54 +1,40 @@
-import { ClienteService } from './../cliente.service';
-import { Component, OnInit } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
-import { Title } from '@angular/platform-browser';
+import { Component, AfterViewInit } from '@angular/core';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-tabela',
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css']
 })
-export class TabelaComponent implements OnInit {
+export class TabelaComponent implements AfterViewInit {
 
-  clientes: any = [];
-  loading: boolean = true;
-  
-  constructor(
-    private service: ClienteService,
-    private confirmarService: ConfirmationService,
-    private messageService: MessageService,
-    private title: Title) { }
+  private map: any;
 
-  ngOnInit() {    
-    this.loading = true;
-    this.carregar();  
-  }  
+  private initMap(): void {
+    this.map = L.map('map', {
+      center: [ 39.8282, -98.5795 ],
+      zoom: 10
+    });
 
-  carregar(){
-    this.title.setTitle('Lista de clientes');
-    this.clientes = [];
-    this.service.listar().subscribe(resposta => {
-      this.clientes = resposta;
-      this.loading = false;         
-    });  
+    this.map.on('click', (ev: any) => {
+      var latlng = this.map.mouseEventToLatLng(ev.originalEvent);
+      console.log(latlng.lat + ', ' + latlng.lng);
+    });    
+
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      minZoom: 3,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    tiles.addTo(this.map);
   }
 
-  excluir(id: number){
-    this.confirmarService.confirm({
-      message: 'Tem certeza que deseja excluir este cliente?',
-      accept: () => {
-        this.service.excluir(id).subscribe( resposta => {
-          this.messageService.add(
-            {
-              key: 'toast',
-              severity: 'success',
-              summary: 'CLIENTE',
-              detail: 'excluído com sucesso!'
-            });   
-            this.carregar();
-        });    
-      }
-  });
+  constructor() { }
+
+  ngAfterViewInit(): void {
+    this.initMap();
   }
+   
 }
+
